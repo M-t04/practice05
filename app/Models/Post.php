@@ -10,13 +10,15 @@ class Post extends Model
 {
     use HasFactory;
     
-        public function category()
+    //Gameに対するリレーション
+    //１:多の関係なので単数形に
+        public function game()
     {
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(game::class);
     }
     
     protected $fillable = [
         'body',
-        'category_id'
+        'game_id'
         ];
 }

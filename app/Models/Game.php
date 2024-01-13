@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     use HasFactory;
+    
+    //Postに対するリレーション
+    //１：多の関係なので'posts'と複数形に
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
