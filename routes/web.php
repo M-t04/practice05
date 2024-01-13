@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController; //外部にあるPostControllerクラスをインポート。
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index']);
+Route::get('/posts/post', [PostController::class, 'create']);
+Route::get('/post/{post}', [PostController::class , 'show']);
+// '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
+Route::post('/posts', [PostController::class, 'store']);
