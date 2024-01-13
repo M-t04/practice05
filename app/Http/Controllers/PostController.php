@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 //use宣言は外部にあるクラスをPostController内にインポートできる。
 //この場合、App\Models内のPostクラスをインポートしている。
 use App\Models\Post;
-use App\Models\Category;
+use App\Models\Game;
 
 class PostController extends Controller
 {
@@ -15,9 +15,9 @@ class PostController extends Controller
         return view('posts.post')->with(['posts' => $post->get()]);
         //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     }
-        public function create(Category $category)
+        public function create(Game $game)
     {
-        return view('posts.post')->with(['categories' => $category->get()]);
+        return view('posts.post')->with(['games' => $game->get()]);
     }
     public function show(Post $post)
     {

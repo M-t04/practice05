@@ -4,19 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+use App\Models\Game;
 
 class Post extends Model
 {
     use HasFactory;
     
-        public function category()
+    // Gameに対するリレーション
+    //「1対多」の関係なので単数系に
+    public function game()
     {
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(game::class);
     }
     
     protected $fillable = [
         'body',
-        'category_id'
+        'game_id'
         ];
 }
