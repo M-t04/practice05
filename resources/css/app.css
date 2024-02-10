@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.delete{
+    @apply w-20 h-6 text-sm text-white rounded-lg bg-cyan-500
+}
+
+.username{
+    @apply font-medium
+}
+
+.create{
+    @apply text-lg font-medium underline underline-offset-4 decoration-sky-500
+}
+
+h1{
+    @apply font-bold text-2xl
+}
+
+.textarea{
+    @apply caret-sky-500
+}
