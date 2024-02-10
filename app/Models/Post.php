@@ -5,20 +5,46 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Game;
+use App\Models\Favorite;
+use App\Models\User;
+use App\Models\Commment;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     
     // Gameに対するリレーション
     //「1対多」の関係なので単数系に
     public function game()
     {
-        return $this->belongsTo(game::class);
+        return $this->belongsTo(Game::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
+    function getPaginateByLimit(int $limit_count = 5)
+    {
+        return $this::with('game')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
     protected $fillable = [
         'body',
-        'game_id'
-        ];
+        'game_id',
+        'user_id',
+    ];
 }

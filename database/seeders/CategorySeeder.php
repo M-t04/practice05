@@ -18,11 +18,40 @@ class categorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'レース',
-            'image' => '',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-            ]);
-        //
+        'name' => 'パズル',
+        'image' => '',
+        'created_at' => new DateTime(),
+        'updated_at' => new DateTime(),
+        ]);
+        //1
+        DB::table('categories')->insert([
+        'name' => 'シューティング',
+        'image' => '',
+        'created_at' => new DateTime(),
+        'updated_at' => new DateTime(),
+        ]);
+        //2
+        DB::table('categories')->insert([
+        'name' => '格闘',
+        'image' => '',
+        'created_at' => new DateTime(),
+        'updated_at' => new DateTime(),
+        ]);
+        //3
+        DB::table('categories')->insert([
+        'name' => 'レース',
+        'image' => '',
+        'created_at' => new DateTime(),
+        'updated_at' => new DateTime(),
+        ]);
+        //4
+        DB::table('categories')->insert([
+        'name' => 'RPG',
+        'image' => '',
+        'created_at' => new DateTime(),
+        'updated_at' => new DateTime(),
+        ]);
+        //5
+        
     }
 }
