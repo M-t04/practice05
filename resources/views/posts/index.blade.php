@@ -1,7 +1,4 @@
     <x-app-layout>
-        <x-slot name="header">
-            Index
-        </x-slot>
 <!--投稿一覧-->
         <h1 class="font-bold text-4xl">トップページ</h1>
         <div>
