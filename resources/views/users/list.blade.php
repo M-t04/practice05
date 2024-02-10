@@ -1,14 +1,11 @@
 <x-app-layout>
-    <x-slot name="header">
-        Index
-    </x-slot>
     <div>
-        <h3>相互フォロー</h3>
+        <h2>相互フォロー</h2>
         <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>名前</th>
-            </tr>
+            <!--<tr>-->
+            <!--    <th>ID</th>-->
+            <!--    <th>名前</th>-->
+            <!--</tr>-->
             
             @foreach($follow_eachs as $follow_each)
             <tr>
@@ -22,12 +19,12 @@
             @endforeach
         </table>
         
-        <h3>あなたがフォローしているユーザー</h3>
+        <h2>フォロー</h2>
         <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>名前</th>
-            </tr>
+            <!--<tr>-->
+            <!--    <th>ID</th>-->
+            <!--    <th>名前</th>-->
+            <!--</tr>-->
             
             @foreach($follows as $follow)
             <tr>
@@ -41,12 +38,12 @@
             @endforeach
         </table>
         
-        <h3>あなたをフォローしているユーザー</h3>
+        <h2>フォロワー</h2>
         <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>名前</th>
-            </tr>
+            <!--<tr>-->
+            <!--    <th>ID</th>-->
+            <!--    <th>名前</th>-->
+            <!--</tr>-->
             
             @foreach($followers as $follower)
             <tr>
