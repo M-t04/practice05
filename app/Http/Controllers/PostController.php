@@ -19,9 +19,6 @@ class PostController extends Controller
     // 一覧表示
     public function index(Post $post)
     {
-        
-        //$post->favorites()->get();
-        //dd($post);
         // post_idが$postのIDと一致し且つuser_idがログインしているuserIDと一致している場合その値を$favoriteに格納する
         $favorite=Favorite::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
         // blade内で使う変数名'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
