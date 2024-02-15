@@ -51,22 +51,23 @@ class UserController extends Controller
     }
     
     public function list(){
-        //ログインユーザーがフォローしているユーザーのIDを$follow_idにArrayで格納
-        $follow_id = Follow_user::where('followed_user_id', Auth::user()->id)->pluck('following_user_id')->toArray();
+        
+        // ログインユーザーのフォローIDを$follow_idにArrayで格納
+        $follow_id = Follow_user::where('following_user_id', Auth::user()->id)->pluck('followed_user_id')->toArray();
     
-        //ログインユーザーをフォローしているユーザーのIDを$follower_idにArrayで格納
-        $follower_id = Follow_user::where('following_user_id', Auth::user()->id)->pluck('followed_user_id')->toArray();
+        // ログインユーザーフォロワーIDを$follower_idにArrayで格納
+        $follower_id = Follow_user::where('followed_user_id', Auth::user()->id)->pluck('following_user_id')->toArray();
     
-        //相互フォローユーザーのIDを$follow_eachに格納
+        // 相互フォローユーザーのIDを$follow_eachに格納
         $follow_each_id = array_intersect($follow_id, $follower_id);
     
-        //相互フォローユーザー
+        // 相互フォローユーザー
         $follow_eachs = User::whereIn('id', $follow_each_id)->get();
     
-        //ログインユーザーのフォローしているユーザー(相互フォローユーザーを除く)
+        // ログインユーザーのフォローしているユーザー(相互フォローユーザーを除く)
         $follows = User::whereIn('id',$follow_id)->whereNotIn('id',$follow_each_id)->get();
     
-        //ログインユーザーをフォローしているユーザー(相互フォローユーザーを除く)
+        // ログインユーザーをフォローしているユーザー(相互フォローユーザーを除く)
         $followers = User::whereIn('id',$follower_id)->whereNotIn('id',$follow_each_id)->get();
     
     

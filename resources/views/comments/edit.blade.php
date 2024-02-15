@@ -1,18 +1,22 @@
-    <x-app-layout>
-        <x-slot name="header">
-            コメント編集画面
-        </x-slot>
-        <h1>コメント編集画面</h1>
-            <div class='content'>
+<x-app-layout>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                <h1 class="text-2xl font-semibold mb-4">コメント編集画面</h1>
                 <form action="{{ route('comment.update', $comment->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class='content_body'>
-                        <h2>{{ Auth::user()->name }}</h2>
-                        <textarea class="textarea" name="comment[body]" placeholder='入力スペース'>{{ $comment->body }}</textarea>
+                    <div class="mb-4">
+                        <label for="body" class="block text-sm font-medium text-gray-700">コメント</label>
+                        <textarea id="body" name="comment[body]" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $comment->body }}</textarea>
                     </div>
-                    <input type="submit" value="保存">
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">保存</button>
+                    </div>
                 </form>
-                <a href="/posts/{{ $comment->post_id }}">戻る</a>
+                <a href="/posts/{{ $comment->post_id }}" class="mt-4 text-indigo-600 hover:underline">戻る</a>
             </div>
-    </x-app-layout>
+        </div>
+    </div>
+</x-app-layout>
