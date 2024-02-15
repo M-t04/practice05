@@ -1,11 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        Index
-    </x-slot>
-    <!--選択されたカテゴリーのゲーム一覧を表示する-->
+    <div class="py-8 px-4 sm:px-6 lg:px-8">
         @foreach($games as $game)
-            <div class='games'>
-            <p class='category'>{{ $games->category->name }}</p>
+            <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                <p class="text-gray-600">{{ $game->category->name }}</p>
+                <h2 class="text-xl font-semibold text-gray-800">{{ $game->title }}</h2>
+                <p class="text-gray-500">{{ $game->description }}</p>
             </div>
         @endforeach
     </div>

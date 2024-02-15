@@ -42,7 +42,6 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/posts/favorite/{post}', 'favorite')->name('favorite');
     // いいねを外す
     Route::get('/posts/unfavorite/{post}', 'unfavorite')->name('unfavorite');
-    
 });
 
 

@@ -14,6 +14,12 @@ class Post extends Model
 {
     use SoftDeletes;
     use HasFactory;
+
+    protected $fillable = [
+        'body',
+        'game_id',
+        'user_id',
+    ];
     
     // Gameに対するリレーション
     //「1対多」の関係なので単数系に
@@ -32,19 +38,21 @@ class Post extends Model
         return $this->hasMany(Favorite::class);
     }
     
+    
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
     
-    function getPaginateByLimit(int $limit_count = 5)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         return $this::with('game')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
-    protected $fillable = [
-        'body',
-        'game_id',
-        'user_id',
-    ];
+    public function isfavoritedByUser($userId)
+    {
+        return $this->favorites()->where('user_id', $userId)->exists();
+    }
+    
+    // postテーブルに存在する一つのデータに対して行う処理
 }

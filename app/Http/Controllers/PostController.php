@@ -18,10 +18,20 @@ class PostController extends Controller
     // 一覧表示
     public function index(Post $post)
     {
+        
+        //$post->favorites()->get();
+        //dd($post);
+        // post_idが$postのIDと一致し且つuser_idがログインしているuserIDと一致している場合その値を$favoriteに格納する
+        $favorite=Favorite::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
         // blade内で使う変数名'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
         // WithでPostテーブルのデータを渡している
-        return view('posts.index')->with(['posts' => $post->get()]);
+        // 'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
+        return view('posts.index')->with([
+            'posts' => $post->get(),
+            'favorite'=> $favorite
+            ]);
     }
+
     
     // 投稿作成画面表示
     // Game・UserはModel
@@ -48,7 +58,7 @@ class PostController extends Controller
     }
 
     // 既存の投稿詳細画面を表示 
-    public function show(Post $post, User $user)
+    public function show(Post $post)
     {
         $favorite=Favorite::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
         //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
@@ -79,20 +89,29 @@ class PostController extends Controller
     
     // いいねをつける
     public function favorite(Post $post, Request $request){
+        // Favoriteモデルのインスタンス化
         $favorite=New Favorite();
+        // 作成したfavoriteインスタンスに、指定された投稿のIDを格納
         $favorite->post_id=$post->id;
+        // ログインしているユーザーのIDをfavoriteインスタンスに格納
         $favorite->user_id=Auth::user()->id;
+        // タイムスタンプの無効化
         $favorite->timestamps = false;
+        // 保存
         $favorite->save();
+        // リダイレクト
         return back();
-
     }
     
     // いいねを外す
     public function unfavorite(Post $post, Request $request){
+        // ログインユーザーのIDを取得
         $user=Auth::user()->id;
+        // post_idが$postのIDと一致し且つuser_idがログインしているuserIDと一致している場合その値を$favoriteに格納する
         $favorite=Favorite::where('post_id', $post->id)->where('user_id', $user)->first();
+        // favoriteの削除
         $favorite->delete();
+        // リダイレクト
         return back();
     }
 }
