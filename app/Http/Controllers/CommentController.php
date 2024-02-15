@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\CommentRequest;
 use App\Models\Comment;
 
 class CommentController extends Controller
 {
     
     // コメントの保存
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        $input = request()->validate([
-            // コメントは500字以内
-            'body' => 'required|max:500'
-        ]);
+        $input = $request['comment'];
         
         $comment = Comment::create([
             'body' => $input['body'],

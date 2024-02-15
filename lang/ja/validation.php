@@ -153,6 +153,8 @@ return [
     |
     */
 
-    'attributes' => [],
-
+    'attributes' => [
+        'post.body' => '本文',
+        'comment.body' => '本文'
+    ],
 ];
