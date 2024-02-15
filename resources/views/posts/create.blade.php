@@ -14,7 +14,9 @@
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-600 font-semibold mb-2" for="body">投稿作成</label>
-                            <textarea class="w-full border rounded-md p-2" name="post[body]" id="body" placeholder='入力スペース'></textarea>
+                            <textarea class="w-full border rounded-md p-2" name="post[body]" id="body" placeholder='入力スペース'>{{ old('post.body') }}</textarea>
+                            {{-- エラーメッセージの表示 --}}
+                           <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                         </div>
                         <input type="submit" value="投稿する" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         <div class="mt-4">

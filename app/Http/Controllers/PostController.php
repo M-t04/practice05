@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 //use宣言は外部にあるクラスをPostController内にインポートできる。
 //この場合、App\Models内のPostクラスをインポートしている。
 
@@ -43,7 +44,7 @@ class PostController extends Controller
     }
     
     // 投稿保存処理
-    public function store(Request $request, Post $post)//インポートしたPostをインスタンス化して$postとして使用。
+    public function store(PostRequest $request, Post $post)//インポートしたPostをインスタンス化して$postとして使用。
     {
         $input = $request['post'];
         $post->user_id = Auth::id();
@@ -72,7 +73,7 @@ class PostController extends Controller
     }
     
     // 編集の保存
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
         $post->fill($input_post)->save();
