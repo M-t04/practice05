@@ -60,14 +60,21 @@
                         </form>
                         <!-- ここまでDELETEボタン -->
                     @endforeach
-
+                    <script>
+                        function deleteComment(id) {
+                            'use strict'
+                            if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                                document.getElementById(`form_${id}`).submit();
+                            }
+                        }
+                    </script>
                     <!-- コメント欄を追加する -->
                     <div class="mt-4">
                         <form method="post" action="{{ route('comment.store') }}">
                             @csrf
-                            <input type="hidden" name='post_id' value="{{ $post->id }}">
+                            <input type="hidden" name='comment[post_id]' value="{{ $post->id }}">
                             <div>
-                                <textarea class="textarea" name="body" id="body" placeholder="コメントを入力する">{{ old('body') }}</textarea>
+                                <textarea class="textarea" name="comment[body]" id="body" placeholder="コメントを入力する">{{ old('body') }}</textarea>
                                 <p class="body__error" style="color:red">{{ $errors->first('comment.body') }}</p>
                             </div>
                             <div>

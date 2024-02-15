@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\CommentRequest;
 use App\Models\Comment;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentController extends Controller
 {
     
     // コメントの保存
-    public function store(CommentRequest $request)
+    public function store(CommentRequest $request, Comment $comment)
     {
         $input = $request['comment'];
-        
-        $comment = Comment::create([
-            'body' => $input['body'],
-            'user_id' => auth()->user()->id,
-            'post_id' => $request->post_id
-        ]);
+        $comment->user_id = Auth::id();
+        $comment->post_id = $request->post_id;
+        $comment->fill($input)->save();
         
         return back();
     }
