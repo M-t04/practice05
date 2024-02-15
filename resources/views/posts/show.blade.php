@@ -68,6 +68,7 @@
                             <input type="hidden" name='post_id' value="{{ $post->id }}">
                             <div>
                                 <textarea class="textarea" name="body" id="body" placeholder="コメントを入力する">{{ old('body') }}</textarea>
+                                <p class="body__error" style="color:red">{{ $errors->first('comment.body') }}</p>
                             </div>
                             <div>
                                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
